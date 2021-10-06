@@ -1,18 +1,43 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <NuevoPaciente/>
+    <ListaPacientes/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Firebase from 'firebase';
+import NuevoPaciente from '../components/NuevoPaciente.vue';
+import ListaPacientes from '../components/ListaPacientes.vue';
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
-  }
+    NuevoPaciente,
+    ListaPacientes
+  },
+  data: ()=> ({
+    pacientes: []
+  }),
+  /* mounted () {
+    Firebase
+      .firestore()
+      .collection("pacientes")
+      .get()
+      .then(collection => {
+        collection.forEach(document => {
+          this.pacientes.push({id: document.id, ...document.data() })
+      })
+    });
+    Firebase
+      .firestore()
+      .collection("pacientes")
+      .onSnapshot((querySnapchot) => {
+        this.pacientes = [];
+        querySnapchot.forEach(document => {
+          this.pacientes.push({id: document.id, ...document.data() })
+        })
+      });
+  } */
 }
 </script>
